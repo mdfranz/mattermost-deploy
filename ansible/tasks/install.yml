@@ -21,3 +21,9 @@
       state: directory
       owner: "{{ mm_os_user }}"
       group: "{{ mm_os_user }}"
+
+  - name: Download release
+    get_url: 
+      url: "{{ mm_release }}"
+      dest: "{{ mm_path }}/mattermost.tgz"
+      checksum: "sha256:{{ mm_shasum }}"
