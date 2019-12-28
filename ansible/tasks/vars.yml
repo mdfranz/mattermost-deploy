@@ -1,0 +1,6 @@
+---
+mm_os_user: mattermost
+mm_path: /opt/mattermost
+mm_release: https://releases.mattermost.com/5.18.0/mattermost-5.18.0-linux-amd64.tar.gz
+mm_db_user: mmuser
+mm_db_name: mattermost
