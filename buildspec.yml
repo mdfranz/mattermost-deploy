@@ -5,9 +5,10 @@ phases:
   pre_build:
     commands:
       - echo "Installing additional YUM packages..."
-      - yum -y update && yum -y install jq unzip
+      - yum -y update && yum -y install jq unzip curl
       - echo "Installing Packer..."
       - curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip && unzip packer.zip
+      - ./packer version
       - echo "Validating packer JSON"
       - ./packer validate packer/amazon2.json
   build:
