@@ -25,10 +25,19 @@
         {
             "type": "shell",
             "inline":[
-                "sudo yum -y update && sudo yum -y upgrade",
-                "sudo yum -y install python3-pip",
-		"sudo pip3 install ansible==2.9.2"
-            ]
+                "sudo yum -y update && sync && sudo yum -y upgrade && sync",
+                "sleep 3 && sudo yum -y install python3-pip",
+		"sudo pip3 install ansible==2.9.2 boto3 botocore",
+		"sync && sleep 3"]
+        },
+	{
+	    "type": "file",
+	    "source": "../ansible",
+            "destination": "/home/ec2-user/"
+	},
+        {
+            "type": "shell",
+            "inline": [ "cd /home/ec2-user/ansible && ansible-playbook bake.yml" ]
         }
   ]
 }
