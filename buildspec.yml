@@ -10,6 +10,18 @@ phases:
       - yum -y update && yum -y install jq
       - echo "Validating packer JSON"
       - ./packer validate packer/amazon2.json
+  build:
+    runtime:
+      docker: 18
+    commands:
+      - echo "Build Phase"
+
+  install:
+    runtime:
+      docker: 18
+    commands:
+      - echo "Install Phase"
+
   post_build:
     commands:
       - echo "HashiCorp Packer build completed on `date`"
