@@ -11,8 +11,6 @@ phases:
       - echo "Validating packer JSON"
       - ./packer validate packer/amazon2.json
   build:
-    runtime-versions:
-      docker: 18
     commands:
       - echo "Build Phase"
 
