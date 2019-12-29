@@ -9,12 +9,14 @@ I've been looking for usable application to build my ECS Fargate knowledge and I
 - [Mattermost Docker Hub](https://hub.docker.com/u/mattermost)
 - [Terraform for Load Test Cluster](https://github.com/mattermost/mattermost-load-test/blob/master/terraform/cluster.tf)
 - [Manual Load Testing](https://github.com/mattermost/mattermost-load-test/blob/master/docs/manual.md)
+- [Packer & CodeBuild](https://aws.amazon.com/blogs/devops/how-to-create-an-ami-builder-with-aws-codebuild-and-hashicorp-packer/)
 
 # The MVP
-- 
+- Packer builds in AWS Code Build
 - Terraform deployment (new VPC in arbitrary region)
 - SSL Termination on ALB with ACM with existing domain managed by Route53
 - WAF Rules to block all non-US traffic
 - Cheapest RDS instance available (db.t3.micro)
-- Database Passwords stored securely (SSM, Secrets Manager, etc)
+- Database Passwords stored securely with SSM
 - Use S3 for data
+- Single Instance with separate data partition with EBS snapshots enabled 
