@@ -6,8 +6,10 @@ phases:
     commands:
       - echo "Installing additional YUM packages..."
       - yum -y update && yum -y install jq unzip curl
+      - pwd && ls -al
       - echo "Installing Packer..."
-      - curl -qL -o /usr/local/bin/packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip && unzip -o /usr/local/bin/packer.zip
+      - cd /usr/local/bin/ && curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip && unzip packer.zip
+      - cd /
       - packer version
       - echo "Validating packer JSON"
       - packer validate packer/amazon2.json
