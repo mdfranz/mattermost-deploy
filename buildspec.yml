@@ -4,19 +4,18 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - BUILDPATH=`pwd`
       - echo "Installing additional YUM packages..."
       - yum -y update && yum -y install jq unzip curl
-      - BUILDDIR=`pwd`
       - echo "Installing Packer..."
       - cd /usr/local/bin/ && curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip && unzip packer.zip
-      - cd $BUILDDIR && packer version
+      - cd $BUILDPATH && packer version
       - echo "Validating packer JSON"
       - cd packer && packer validate amazon2.json
   build:
     commands:
       - echo "Build Phase"
-      - pwd
-      - cd packer && packer build amazon2.json
+      - cd $BUILDPATH/packer && packer build amazon2.json
 
   install:
     runtime-versions:
