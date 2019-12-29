@@ -1,0 +1,15 @@
+[Unit]
+Description=Mattermost
+After=syslog.target network.target
+
+[Service]
+Type=notify
+WorkingDirectory={{ mm_path }}
+User=mattermost
+ExecStart={{ mm_path }}/bin/mattermost
+PIDFile=/var/spool/mattermost/pid/master.pid
+TimeoutStartSec=3600
+LimitNOFILE=49152
+
+[Install]
+WantedBy=multi-user.target
