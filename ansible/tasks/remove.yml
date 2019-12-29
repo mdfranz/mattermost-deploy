@@ -1,28 +1,19 @@
----
-- hosts: localhost
-  vars_files:
-    - vars.yml
-  become: yes
-  gather_facts: no
+- name: Remove directory
+  file: 
+    path: "{{ mm_path }}"
+    state: absent
+    owner: "{{ mm_os_user }}"
+    group: "{{ mm_os_user }}"
 
-  tasks:
+- name: Remove user
+  user: 
+    name: "{{ mm_os_user }}"
+    state: absent
+    remove: yes
 
-  - name: Remove directory
-    file: 
-      path: "{{ mm_path }}"
-      state: absent
-      owner: "{{ mm_os_user }}"
-      group: "{{ mm_os_user }}"
-
-  - name: Remove user
-    user: 
-      name: "{{ mm_os_user }}"
-      state: absent
-      remove: yes
-
-  - name: Remove group
-    group:
-      name: "{{ mm_os_user }}"
-      state: absent
+- name: Remove group
+  group:
+    name: "{{ mm_os_user }}"
+    state: absent
 
 

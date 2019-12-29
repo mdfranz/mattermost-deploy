@@ -1,52 +1,44 @@
----
-- hosts: localhost
-  vars_files:
-    - vars.yml
-  become: yes
-  gather_facts: no
+- name: Create group
+  group:
+    name: "{{ mm_os_user }}"
+    state: present
 
-  tasks:
-  - name: Create group
-    group:
-      name: "{{ mm_os_user }}"
-      state: present
+- name: Create user
+  user: 
+    name: "{{ mm_os_user }}"
+    group: "{{ mm_os_user }}"
 
-  - name: Create user
-    user: 
-      name: "{{ mm_os_user }}"
-      group: "{{ mm_os_user }}"
+- name: Prep directories
+  file: 
+    path: "{{ mm_path }}"
+    state: directory
+    owner: "{{ mm_os_user }}"
+    group: "{{ mm_os_user }}"
 
-  - name: Prep directories
-    file: 
-      path: "{{ mm_path }}"
-      state: directory
-      owner: "{{ mm_os_user }}"
-      group: "{{ mm_os_user }}"
+- name: Download release
+  get_url: 
+    url: "{{ mm_release }}"
+    dest: "{{ mm_path }}/mattermost.tgz"
+    checksum: "sha256:{{ mm_shasum }}"
 
-  - name: Download release
-    get_url: 
-      url: "{{ mm_release }}"
-      dest: "{{ mm_path }}/mattermost.tgz"
-      checksum: "sha256:{{ mm_shasum }}"
+- name: Expand tarball
+  unarchive:
+    src: "{{ mm_path }}/mattermost.tgz"
+    dest: /opt
 
-  - name: Expand tarball
-    unarchive:
-      src: "{{ mm_path }}/mattermost.tgz"
-      dest: /opt
+- name: Update permissions
+  file: 
+    path: "{{ mm_path }}"
+    state: directory
+    owner: "{{ mm_os_user }}"
+    group: "{{ mm_os_user }}"
+    recurse: yes
+    mode: g+w
 
-  - name: Update permissions
-    file: 
-      path: "{{ mm_path }}"
-      state: directory
-      owner: "{{ mm_os_user }}"
-      group: "{{ mm_os_user }}"
-      recurse: yes
-      mode: g+w
-
-  - name: Create systemd service config file
-    template:
-      dest: "/etc/systemd/system/mattermost.service"
-      src: ../templates/mattermost.service.j2
-      owner: root
-      group: root
-      mode: 0664 
+- name: Create systemd service config file
+  template:
+    dest: "/etc/systemd/system/mattermost.service"
+    src: ../templates/mattermost.service.j2
+    owner: root
+    group: root
+    mode: 0664 
