@@ -9,13 +9,13 @@ phases:
       - yum -y update && yum -y install jq unzip curl
       - echo "Installing Packer..."
       - cd /usr/local/bin/ && curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip && unzip packer.zip
-      - cd $BUILDPATH && packer version
+      - cd $CODEBUILD_SRC_DIR && packer version
       - echo "Validating packer JSON"
       - cd packer && packer validate amazon2.json
   build:
     commands:
       - echo "Build Phase"
-      - cd $BUILDPATH/packer && packer build amazon2.json
+      - cd $CODEBUILD_SRC_DIR/packer && packer build amazon2.json
 
   install:
     runtime-versions:
