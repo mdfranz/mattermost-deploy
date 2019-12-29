@@ -1,0 +1,7 @@
+- name: Populate config file using SSM
+  template:
+    dest: "{{ mm_path }}/config.json"
+    src: "../templates/config.j2"
+    owner: root
+    group: root
+    mode: 0664 

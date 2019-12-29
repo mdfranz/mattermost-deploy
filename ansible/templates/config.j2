@@ -1,6 +1,6 @@
 {
     "ServiceSettings": {
-        "SiteURL": "{{ mm_public_url }}",
+        "SiteURL": "{{ lookup('aws_ssm','mm_public_url') }}",
         "WebsocketURL": "",
         "LicenseFileLocation": "",
         "ListenAddress": ":8065",
@@ -89,7 +89,7 @@
         "EnableLatex": false
     },
     "TeamSettings": {
-        "SiteName": "{{ mm_site_name }}",
+        "SiteName": "{{ lookup('aws_ssm','mm_site_name') }}",
         "MaxUsersPerTeam": 50,
         "EnableTeamCreation": true,
         "EnableUserCreation": true,
@@ -132,7 +132,7 @@
     },
     "SqlSettings": {
         "DriverName": "mysql",
-        "DataSource": "{{ mm_db_user}}:{{ lookup('aws_ssm', 'mm_db_password', region='us-east-2' ) }}`@tcp(localhost:3306)/{{ mm_db_name}}?charset=utf8mb4,utf8\u0026readTimeout=30s\u0026writeTimeout=30s",
+        "DataSource": "{{ mm_db_user }}:{{ lookup('aws_ssm', 'mm_db_password') }}`@tcp({{ lookup('aws_ssm', 'mm_db_host') }}:3306)/{{ mm_db_name }}?charset=utf8mb4,utf8\u0026readTimeout=30s\u0026writeTimeout=30s",
         "DataSourceReplicas": [],
         "DataSourceSearchReplicas": [],
         "MaxIdleConns": 20,
@@ -181,7 +181,7 @@
         "InitialFont": "nunito-bold.ttf",
         "AmazonS3AccessKeyId": "",
         "AmazonS3SecretAccessKey": "",
-        "AmazonS3Bucket": "{{ mm_data_bucket }}",
+        "AmazonS3Bucket": "{{ lookup('aws_ssm','mm_data_bucket') }}",
         "AmazonS3Region": "",
         "AmazonS3Endpoint": "s3.amazonaws.com",
         "AmazonS3SSL": true,
