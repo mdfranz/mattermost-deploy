@@ -25,5 +25,5 @@ phases:
 
   post_build:
     commands:
-      - echo "Packer build completed on `date`"
+      - echo "Packer build done"
       - aws ec2 describe-images --owners self --filters 'Name=name,Values=matter*'
