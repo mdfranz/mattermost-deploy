@@ -12,7 +12,7 @@ I've been looking for usable application to build my ECS Fargate knowledge and I
 - [Packer & CodeBuild](https://aws.amazon.com/blogs/devops/how-to-create-an-ami-builder-with-aws-codebuild-and-hashicorp-packer/)
 
 # The MVP
-- Packer builds in AWS Code Build
+- Packer builds in AWS CodeBuild
 - Terraform deployment (new VPC in arbitrary region)
 - SSL Termination on ALB with ACM with existing domain managed by Route53
 - WAF Rules to block all non-US traffic
