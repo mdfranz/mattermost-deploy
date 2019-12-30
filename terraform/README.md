@@ -4,6 +4,11 @@
 - Create S3 bucket
 - Populate SSM Parameters needed for Ansible 
 - Appropriate userdata scripts 
+- Use hardcoded existing IAM Instance roles
 
+# MVP
+
+- Complete VPC
+- IAM Policies 
 
 
