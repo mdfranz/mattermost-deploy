@@ -8,7 +8,9 @@
 
 # MVP
 
-- Complete VPC
+- Complete new VPC
 - IAM Policies 
+- Any region with supported services
 
+- 
 
