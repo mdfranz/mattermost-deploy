@@ -12,6 +12,8 @@ phases:
       - cd $CODEBUILD_SRC_DIR && packer version
       - echo "Validating packer JSON"
       - cd packer && packer validate amazon2.json
+      - env
+      - echo $HOME
   build:
     commands:
       - echo "Build Phase"
